@@ -11,9 +11,13 @@
     "devstart": "nodemon backend/server.js"
   },
   "dependencies": {
+    "axios": "^1.18.1",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.7.1"
+    "mongoose": "^9.7.1",
+    "react": "^19.2.7",
+    "react-router-dom": "^7.18.0"
   },
   "devDependencies": {
     "dotenv": "^17.4.2",

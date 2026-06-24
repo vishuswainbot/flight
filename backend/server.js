@@ -1,9 +1,15 @@
 require("dotenv").config();
 
+const cors = require("cors");
 const express = require("express");
 const app = express();
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/api/user", require("./loginRoute"));
+
 const Flight = require("./flight_model");
+const User = require("./user_model");
 
 const dns = require("dns");
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
@@ -17,9 +23,14 @@ connectMongoDB(process.env.MONGO_URL)
     console.error(err.message);
   });
 
-app.get("/", async (req, res) => {
+app.get("/flights", async (req, res) => {
   const allFlights = await Flight.find({});
   return res.json(allFlights);
+});
+
+app.get("/users", async (req, res) => {
+  const allUsers = await User.find({});
+  return res.json(allUsers);
 });
 
 app.post("/api/flights", async (req, res) => {
@@ -49,6 +60,29 @@ app.post("/api/flights", async (req, res) => {
   console.log("result", result);
   return res.status(201).json({ msg: "sucess" });
 });
+
+app.post("/api/user", async(req, res)=>{
+  const body = req.body;
+
+  if(
+    !body ||
+    !body.userFirstName ||
+    !body.userContact ||
+    !body.userPassword
+  ) {
+    return res.status(400).json({msg: "Fields are required"});
+  }
+
+  const userResult = await User.create({
+    userFirstName: body.userFirstName,
+    userLastName: body.userLastName,
+    userPassword: body.userPassword,
+    userContact: body.userContact,
+    userEmail: body.userEmail,
+  });
+  console.log("result", userResult);
+  return res.status(200).json({msg: "User created"})
+})
 
 const PORT = process.env.PORT || 5000;
 
