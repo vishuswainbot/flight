@@ -6,10 +6,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/api/user", require("./loginRoute"));
+app.use("/api/user", require("./routes/loginRoute"));
+app.use("/api/user", require("./routes/signupRoute"));
 
-const Flight = require("./flight_model");
-const User = require("./user_model");
+const Flight = require("./models/flight_model");
+const User = require("./models/user_model");
 
 const dns = require("dns");
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
@@ -61,28 +62,30 @@ app.post("/api/flights", async (req, res) => {
   return res.status(201).json({ msg: "sucess" });
 });
 
-app.post("/api/user", async(req, res)=>{
-  const body = req.body;
+// app.post("/api/user", async(req, res)=>{
+//   const body = req.body;
 
-  if(
-    !body ||
-    !body.userFirstName ||
-    !body.userContact ||
-    !body.userPassword
-  ) {
-    return res.status(400).json({msg: "Fields are required"});
-  }
+//   if(
+//     !body ||
+//     !body.userFirstName ||
+//     !body.userLastName ||
+//     !body.userContact ||
+//     !body.userEmail ||
+//     !body.userPassword
+//   ) {
+//     return res.status(400).json({msg: "Fields are required"});
+//   }
 
-  const userResult = await User.create({
-    userFirstName: body.userFirstName,
-    userLastName: body.userLastName,
-    userPassword: body.userPassword,
-    userContact: body.userContact,
-    userEmail: body.userEmail,
-  });
-  console.log("result", userResult);
-  return res.status(200).json({msg: "User created"})
-})
+//   const userResult = await User.create({
+//     userFirstName: body.userFirstName,
+//     userLastName: body.userLastName,
+//     userPassword: body.userPassword,
+//     userContact: body.userContact,
+//     userEmail: body.userEmail,
+//   });
+//   console.log("result", userResult);
+//   return res.status(200).json({msg: "User created"})
+// })
 
 const PORT = process.env.PORT || 5000;
 

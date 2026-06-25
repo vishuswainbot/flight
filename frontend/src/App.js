@@ -1,31 +1,15 @@
-import { useState } from "react";
-import Login from "./login";
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/login";
+import Signup from "./components/signup";
+import Dashboard from "./components/dashboard";
+
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   return (
-    <div>
-      {isLoggedIn ? (
-        <div style={{ textAlign: "center", marginTop: "100px" }}>
-          <h1>Successfully Logged In</h1>
-          <p>Waiting for the developer to build more...</p>
-
-          <button onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      ) : (
-        <Login onLogin={handleLogin} />
-      )}
-    </div>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
 }
 

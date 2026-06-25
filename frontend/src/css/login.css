@@ -1,89 +1,185 @@
-* {
+/* Full page background */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
-.app-title {
-  text-align: center;
-  font-size: 34px;
-  font-weight: bold;
-  color: #0077cc;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-}
-
+/* Center container */
 .login-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f4f6f9;
 }
 
+/* Login card */
 .login-card {
-  background: white;
-  padding: 40px;
-  width: 400px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
+/* Heading */
 .login-card h2 {
   text-align: center;
   margin-bottom: 25px;
   color: #333;
 }
 
+/* Input group */
 .input-group {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
+/* Inputs */
 .input-group input {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: 1px solid #dcdcdc;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 15px;
+  box-sizing: border-box;
+  transition: 0.3s ease;
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: #4a90e2;
+  border-color: #667eea;
+  box-shadow: 0 0 6px rgba(102, 126, 234, 0.4);
 }
 
+/* Login button */
 .login-btn {
   width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  background: #4a90e2;
+  padding: 14px;
+  background: #667eea;
   color: white;
+  border: none;
+  border-radius: 8px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.3s ease;
+  margin-bottom: 12px;
 }
 
 .login-btn:hover {
-  background: #357abd;
+  background: #5563d6;
 }
 
+/* Signup button */
 .signup-btn {
   width: 100%;
-  padding: 12px;
-  margin-top: 12px;
-  border: 2px solid #4a90e2;
-  border-radius: 6px;
-  background: white;
-  color: #4a90e2;
+  padding: 14px;
+  background: transparent;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 .signup-btn:hover {
-  background: #4a90e2;
+  background: #667eea;
   color: white;
 }
 
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .login-card {
+    margin: 20px;
+    padding: 25px;
+  }
+
+  .login-card h2 {
+    font-size: 24px;
+  }
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 20px;
+}
+
+/* Welcome Card */
+.dashboard-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card h1 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.dashboard-card p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #d9363e;
+  transform: translateY(-2px);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .dashboard-card {
+    padding: 25px;
+  }
+
+  .dashboard-card h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.app-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  margin: 25px 0;
+  padding: 15px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  border-radius: 12px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}

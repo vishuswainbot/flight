@@ -1,35 +1,42 @@
-import "./css/login.css";
+import "../css/login.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Login({ onLogin }) {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+console.log(process.env.REACT_APP_API_URL);
     try {
-      const response = await fetch( `${process.env.REACT_APP_API_URL}/api/user/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userEmail: email,
-          userPassword: password,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/user/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userEmail: email,
+            userPassword: password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        onLogin();
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/dashboard");
       } else {
         alert(data.message || "Login Failed");
       }
     } catch (error) {
-      console.error(error);
-      alert("Server Error");
+      console.error("Login Error:", error);
+      alert(error.message);
     }
   };
 
@@ -66,7 +73,7 @@ function Login({ onLogin }) {
           <button
             type="button"
             className="signup-btn"
-            onClick={() => alert("Navigate to Sign Up Page")}
+            onClick={() => navigate("/signup")}
           >
             Sign Up
           </button>
