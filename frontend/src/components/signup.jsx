@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import "../css/signup.css";
+import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ function Signup() {
     userEmail: "",
     userPassword: "",
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -105,8 +106,16 @@ function Signup() {
             required
           />
 
-          <button type="submit">
+          <button 
+          type="submit">
             Register
+          </button>
+
+          <button 
+          type="submit"
+          className="login"
+          onClick={()=> navigate("/")}>
+            Login
           </button>
         </form>
       </div>

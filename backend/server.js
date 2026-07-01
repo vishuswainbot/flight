@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/user", require("./routes/loginRoute"));
 app.use("/api/user", require("./routes/signupRoute"));
+app.use("/api/user", require("./routes/flightRoute"))
 
 const Flight = require("./models/flight_model");
 const User = require("./models/user_model");
@@ -23,11 +24,6 @@ connectMongoDB(process.env.MONGO_URL)
     console.error("MongoDB Error:");
     console.error(err.message);
   });
-
-app.get("/flights", async (req, res) => {
-  const allFlights = await Flight.find({});
-  return res.json(allFlights);
-});
 
 app.get("/users", async (req, res) => {
   const allUsers = await User.find({});

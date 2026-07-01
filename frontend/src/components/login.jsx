@@ -10,7 +10,6 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-console.log(process.env.REACT_APP_API_URL);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/api/user/login`,
@@ -23,14 +22,13 @@ console.log(process.env.REACT_APP_API_URL);
             userEmail: email,
             userPassword: password,
           }),
-        }
+        },
       );
 
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/dashboard");
+        navigate("/flights");
       } else {
         alert(data.message || "Login Failed");
       }
