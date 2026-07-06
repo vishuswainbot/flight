@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require("uuid");
+const {setUser} = require("../service/sessionAuth")
 const express = require("express");
 const loginRouter = express.Router();
 
@@ -21,6 +23,12 @@ loginRouter.post("/login", async (req, res) => {
         message: "Invalid password",
       });
     }
+    const token = setUser(user);
+    res.cookie("uid", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax"
+    });
 
     res.status(200).json({
       success: true,

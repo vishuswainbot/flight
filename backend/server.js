@@ -1,14 +1,22 @@
 require("dotenv").config();
-
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const express = require("express");
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/user", require("./routes/loginRoute"));
 app.use("/api/user", require("./routes/signupRoute"));
-app.use("/api/user", require("./routes/flightRoute"))
+app.use("/api/user", require("./routes/flightRoute"));
+app.use("/api/user", require("./routes/currentUserRoute"))
 
 const Flight = require("./models/flight_model");
 const User = require("./models/user_model");
@@ -57,31 +65,6 @@ app.post("/api/flights", async (req, res) => {
   console.log("result", result);
   return res.status(201).json({ msg: "sucess" });
 });
-
-// app.post("/api/user", async(req, res)=>{
-//   const body = req.body;
-
-//   if(
-//     !body ||
-//     !body.userFirstName ||
-//     !body.userLastName ||
-//     !body.userContact ||
-//     !body.userEmail ||
-//     !body.userPassword
-//   ) {
-//     return res.status(400).json({msg: "Fields are required"});
-//   }
-
-//   const userResult = await User.create({
-//     userFirstName: body.userFirstName,
-//     userLastName: body.userLastName,
-//     userPassword: body.userPassword,
-//     userContact: body.userContact,
-//     userEmail: body.userEmail,
-//   });
-//   console.log("result", userResult);
-//   return res.status(200).json({msg: "User created"})
-// })
 
 const PORT = process.env.PORT || 5000;
 

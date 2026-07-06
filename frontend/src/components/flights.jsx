@@ -8,12 +8,12 @@ function Flights() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
-  navigate("/"); 
-}; 
-useEffect(() => {
+    navigate("/");
+  };
+  useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/user/flights`)
       .then((response) => {
         if (!response.ok) {
@@ -35,10 +35,14 @@ useEffect(() => {
         <h1>✈ Available Flights</h1>
         <p>Choose your next journey</p>
       </div>
-      <button className="logout-btn"
-      onClick={handleLogout}
-      >Log Out</button>
-
+      <div className="top-buttons">
+        <button className="user-btn" onClick={() => navigate("/:id")}>
+          User
+        </button>
+        <button className="logout-btn" onClick={handleLogout}>
+          Log Out
+        </button>
+      </div>
       <div className="flight-grid">
         {flights.map((flight) => (
           <div className="flight-card" key={flight._id}>

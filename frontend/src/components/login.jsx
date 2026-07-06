@@ -15,6 +15,7 @@ function Login() {
         `${process.env.REACT_APP_API_URL}/api/user/login`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
