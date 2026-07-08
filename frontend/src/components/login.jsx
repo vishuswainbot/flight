@@ -1,11 +1,11 @@
 import "../css/login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -55,14 +55,20 @@ function Login() {
             />
           </div>
 
-          <div className="input-group">
+          <div className="input-group password-group">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <span
+            className="eye-icon"
+            onClick={()=>setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye/>}
+            </span>
           </div>
 
           <button type="submit" className="login-btn">

@@ -183,3 +183,34 @@ body {
   margin-right: auto;
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
 }
+
+/* Password Input Group */
+.input-group.password-group {
+  position: relative;
+}
+
+.input-group.password-group input {
+  width: 100%;
+  padding-right: 50px; /* Space for the eye icon */
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  user-select: none;
+}
+
+.eye-icon:hover {
+  color: #667eea;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.eye-icon:active {
+  transform: translateY(-50%) scale(0.95);
+}
