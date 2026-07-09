@@ -1,14 +1,13 @@
-const { v4: uuidv4 } = require("uuid");
 const {setUser} = require("../service/sessionAuth")
 const express = require("express");
 const loginRouter = express.Router();
+const bcrypt = require("bcrypt");
 
 const User = require("../models/user_model");
 
 loginRouter.post("/login", async (req, res) => {
   try {
     const { userEmail, userPassword } = req.body;
-
     const user = await User.findOne({ userEmail });
     if (!user) {
       return res.status(404).json({
@@ -16,8 +15,9 @@ loginRouter.post("/login", async (req, res) => {
         message: "User not found",
       });
     }
+    const passwordMatch = await bcrypt.compare(userPassword, user.userPassword);
 
-    if (user.userPassword !== userPassword) {
+    if (!passwordMatch) {
       return res.status(401).json({
         success: false,
         message: "Invalid password",
